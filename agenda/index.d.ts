@@ -355,6 +355,16 @@ declare module "agenda" {
             repeatAt(time: string): Job
 
             /**
+             * Specifies a time when the job should repeat and an interval on which the job should repeat.
+             * Interval of cron format will not use the time param
+             * @param time
+             * @param interval A human-readable format String, a cron format String, or a Number.
+             * @param options An optional argument that can include a timezone field. The timezone should be a string as
+             * accepted by moment-timezone and is considered when using an interval in the cron string format.
+             */
+            repeatAtEvery(time: string, interval: string | number, options?: { timezone?: string }): Job
+
+            /**
              * Disables the job.
              */
             disable(): Job;
@@ -375,7 +385,7 @@ declare module "agenda" {
              * Specifies the next time at which the job should run.
              * @param time The next time at which the job should run.
              */
-            schedule(time: string | Date): Job;
+            schedule(time: string | Date, options?: { timezone?: string }): Job;
 
             /**
              * Specifies the priority weighting of the job.
